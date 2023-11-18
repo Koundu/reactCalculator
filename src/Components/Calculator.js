@@ -52,15 +52,8 @@ const Calculator = ()=>{
             default:
                 break;
         }
-        }else if(num1 >= 0 || num2 === ""){//Checking the case when num1 is not 0 and num2 is 0
-            setResult("Num 2 Cannot be Empty");//Upading the Result
-            setRemark("Error!");//Updating the Remark
-            color(remark);//Changing the color of the Remark
-        }else if(num2 >= 0 || num1 === ""){//Checking the case when num2 is not 0 and num1 is 0
-            setResult("Num 1 Cannot be Empty");
-            setRemark("Error!");
-            color(remark);
         }
+
     }
     /*Styling of the Remark Message weather Error or Success */
     function color(remark){
@@ -81,9 +74,24 @@ const Calculator = ()=>{
     /*Creationg of useEffect Hook to check the result as NaN, When result is NaN it will display Error Message*/
     useEffect(()=>{
         if(isNaN(result)){
-            setResult("Please Enter Valid Numbers");
-            setRemark("Error!");
-            color(remark);         
+            if(isNaN(num1) && isNaN(num2)){
+                setResult("Please Enter Numbers");
+                setRemark("Error!");
+                color(remark); 
+            }
+            else if(num1 > 0 && num2 === ""){//Checking the case when num1 is not 0 and num2 is 0
+                setResult("Num 2 Cannot be Empty");//Upading the Result
+                setRemark("Error!");//Updating the Remark
+                color(remark);//Changing the color of the Remark
+            }else if(num2 > 0 && num1 === ""){//Checking the case when num2 is not 0 and num1 is 0
+                setResult("Num 1 Cannot be Empty");
+                setRemark("Error!");
+                color(remark);
+            } else{
+                setResult("Please Enter All the Numbers");
+                setRemark("Error!");
+                color(remark)
+            }   
         }
     },[result])//Passing the result parameter
 
